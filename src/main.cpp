@@ -1,9 +1,11 @@
 #include <iostream>
-#include "example.h"
+#include "cli.h"
 
-int main()
+int main(int argc, char* argv[])
 {
-    std::cout << helper() << std::endl;
+    App::cli obj = App::cli("Hello World!");
+
+    std::cout << obj.getMessage() << std::endl;
 
     return EXIT_SUCCESS;
 }
