@@ -1,21 +1,22 @@
 TARGET = cli-example
+TARGET_DIR = ./build
 
 CC = g++
 CFLAGS = -g -Wall
 
 SRCS = $(shell find ./src -type f -name *.cpp)
-HEADS = $(shell find -type f -name *.h)
+HEADS = $(shell find ./src -type f -name *.h)
 
 all: $(TARGET)
 
 $(TARGET): *.o
 	$(CC) $(CFLAGS) -o $(TARGET) *.o
+	mkdir -p $(TARGET_DIR)
+	mv $(TARGET) $(TARGET_DIR)
 	$(RM) *.o
-	mkdir -p ./build
-	mv $(TARGET) ./build
 
 *.o: $(SRCS) $(HEADS)
 	$(CC) $(CFLAGS) -c $(SRCS) $(HEADS)
 
 clean:
-	$(RM) $(TARGET) *.o ./src/*.gch
+	$(RM) $(TARGET_DIR)/$(TARGET) *.o ./src/*.gch
